@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
@@ -59,11 +59,11 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
   }, [onComplete])
 
   return (
-    <AnimatePresence>
-      <motion.div
-        key="loader-container"
-        className="fixed inset-0 z-[100] bg-[#020a13] flex flex-col items-center justify-center p-6 overflow-hidden"
-      >
+    <motion.div
+      key="loader-container"
+      initial={{ opacity: 1 }}
+      className="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center p-6 overflow-hidden"
+    >
         {/* Atmosphere: Neutralized Background Video Layer */}
         <div className="absolute inset-0 z-0">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover scale-110 blur-[4px] opacity-40 grayscale-[0.6]">
@@ -77,8 +77,8 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
           <div className="absolute inset-0 bg-black/10 mix-blend-overlay film-grain pointer-events-none" />
         </div>
 
-        {/* HIGH-IMPACT GRID DISINTEGRATION LAYER (10x10) */}
-        <div className="absolute inset-0 z-50 grid grid-cols-10 grid-rows-10 pointer-events-none">
+        {/* HIGH-IMPACT GRID DISINTEGRATION LAYER (10x10) - Now behind content */}
+        <div className="absolute inset-0 z-10 grid grid-cols-10 grid-rows-10 pointer-events-none">
           {Array.from({ length: 100 }).map((_, i) => (
             <Tile key={i} i={i} />
           ))}
@@ -153,6 +153,5 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
         <div className="absolute -bottom-40 -left-40 w-[800px] h-[800px] bg-white/5 blur-[180px] rounded-full pointer-events-none" />
         <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-white/5 blur-[180px] rounded-full pointer-events-none" />
       </motion.div>
-    </AnimatePresence>
   )
 }
