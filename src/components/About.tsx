@@ -27,11 +27,7 @@ export const About = () => {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent pointer-events-none"
       />
-      <motion.div
-        animate={{ opacity: [0, 0.4, 0], scaleX: [1, 0.8, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent pointer-events-none"
-      />
+
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 relative z-10">
         <motion.div

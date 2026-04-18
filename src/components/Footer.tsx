@@ -53,9 +53,8 @@ export const Footer = () => {
 
 
   return (
-    <footer ref={sectionRef} id="contact" className="py-40 px-6 relative overflow-hidden bg-[#020a13]/50">
-      {/* Top seamless fade from previous section */}
-      <div className="absolute top-0 left-0 right-0 h-40 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #020a13 0%, transparent 100%)' }} />
+    <footer ref={sectionRef} id="contact" className="py-40 px-6 relative overflow-hidden">
+
 
       {/* Cinematic ambient orbs */}
       <motion.div
