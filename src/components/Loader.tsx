@@ -1,49 +1,26 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
 
-// Sand Grain Particle Component
-const SandGrain = () => {
-  // Randomize initial position more towards the center where the content is
-  const initialX = useMemo(() => 40 + Math.random() * 20, [])
-  const initialY = useMemo(() => 40 + Math.random() * 20, [])
-  
-  // Randomize dispersal target (simulating wind blowing to the top-right)
-  const targetX = useMemo(() => 100 + Math.random() * 400, [])
-  const targetY = useMemo(() => -200 - Math.random() * 300, [])
-  
-  // Randomize size and colors for "sand" variety
-  const size = useMemo(() => Math.random() * 1.5 + 0.5, [])
-  const color = useMemo(() => {
-    const colors = ['rgba(255,255,255,0.4)', 'rgba(59,130,246,0.3)', 'rgba(255,255,255,0.1)']
-    return colors[Math.floor(Math.random() * colors.length)]
-  }, [])
-  
-  const delay = useMemo(() => Math.random() * 0.4, [])
-  
+// Grid Tile Component for Disintegration
+const Tile = ({ i }: { i: number }) => {
+  const delay = (i % 10) * 0.05 + Math.floor(i / 10) * 0.05
   return (
     <motion.div
-      initial={{ x: `${initialX}%`, y: `${initialY}%`, opacity: 0, scale: 1 }}
+      initial={{ opacity: 1 }}
       exit={{ 
-        x: `${initialX + targetX}%`, 
-        y: `${initialY + targetY}%`, 
-        opacity: 0,
-        scale: 0.2,
-        rotate: Math.random() * 360,
+        opacity: 0, 
+        scale: 0,
+        rotateY: 90,
+        rotateX: -45,
         transition: { 
-          duration: 1.2, 
+          duration: 0.8, 
           delay: delay,
-          ease: [0.23, 1, 0.32, 1] // Organic deceleration
+          ease: [0.76, 0, 0.24, 1] 
         } 
       }}
-      className="absolute rounded-full pointer-events-none"
-      style={{ 
-        width: size, 
-        height: size,
-        backgroundColor: color,
-        filter: 'blur(0.5px)'
-      }}
+      className="bg-[#020a13] w-full h-full"
     />
   )
 }
@@ -66,7 +43,7 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(timer)
-          setTimeout(onComplete, 1500) // Longer delay to appreciate the sand dispersal
+          setTimeout(onComplete, 2200) // Longer delay to allow for the grid tiles to finish
           return 100
         }
         
@@ -85,26 +62,25 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
     <AnimatePresence>
       <motion.div
         key="loader-container"
-        initial={{ opacity: 1 }}
-        exit={{ 
-          opacity: 0,
-          filter: "url(#sand-noise)",
-          transition: { duration: 1.2, ease: "easeInOut" }
-        }}
         className="fixed inset-0 z-[100] bg-[#020a13] flex flex-col items-center justify-center p-6 overflow-hidden"
       >
-        {/* Background Video Layer */}
+        {/* Atmosphere: Neutralized Background Video Layer */}
         <div className="absolute inset-0 z-0">
-          <video autoPlay loop muted playsInline className="w-full h-full object-cover scale-110 blur-[3px] opacity-30 grayscale-[0.5]">
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover scale-110 blur-[4px] opacity-40 grayscale-[0.6]">
             <source src={VIDEO_URL} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[#020a13]/70 film-grain" />
+          {/* Neutral Charcoal Overlay (Reduced Blue) */}
+          <div className="absolute inset-0 bg-[#080808]/80 mix-blend-multiply" />
+          
+          {/* NOTICEABLE GRAINY BLUR LAYER */}
+          <div className="absolute inset-0 backdrop-blur-[10px] film-grain opacity-60 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/10 mix-blend-overlay film-grain pointer-events-none" />
         </div>
 
-        {/* Sand Dispersal Grains (250+ particles) */}
-        <div className="absolute inset-0 z-30 overflow-hidden pointer-events-none">
-          {Array.from({ length: 250 }).map((_, i) => (
-            <SandGrain key={i} />
+        {/* HIGH-IMPACT GRID DISINTEGRATION LAYER (10x10) */}
+        <div className="absolute inset-0 z-50 grid grid-cols-10 grid-rows-10 pointer-events-none">
+          {Array.from({ length: 100 }).map((_, i) => (
+            <Tile key={i} i={i} />
           ))}
         </div>
 
@@ -114,24 +90,24 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ 
               opacity: 0, 
-              y: -50,
-              filter: "blur(4px)",
-              transition: { duration: 0.8, ease: "easeIn" }
+              scale: 0.9,
+              filter: "blur(10px)",
+              transition: { duration: 0.5, ease: "easeIn" }
             }}
             className="text-center mb-16"
           >
             <div className="flex items-center justify-center gap-6 mb-8 opacity-40">
-              <div className="h-[1px] w-12 bg-blue-500/50" />
+              <div className="h-[1px] w-12 bg-white/20" />
               <span className="text-[10px] uppercase tracking-[1em] text-white">Initialization</span>
-              <div className="h-[1px] w-12 bg-blue-500/50" />
+              <div className="h-[1px] w-12 bg-white/20" />
             </div>
             
             <h2 className="text-6xl md:text-8xl tracking-tight mb-8" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              PROJECT <em className="not-italic text-blue-400/30 italic">ODYSSEY</em>
+              PROJECT <em className="not-italic text-white/20 italic">ODYSSEY</em>
             </h2>
             
-            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-md">
-              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
+            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-white/5 bg-white/[0.04] backdrop-blur-3xl">
+              <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse shadow-[0_0_12px_rgba(255,255,255,0.4)]" />
               <p className="text-[10px] uppercase tracking-[0.4em] text-white/50 font-medium">
                 {currentMessage}
               </p>
@@ -139,19 +115,19 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
           </motion.div>
 
           {/* Minimalist Progress Line */}
-          <div className="relative h-[2px] w-full bg-white/5 overflow-hidden mb-8">
+          <div className="relative h-[1px] w-full bg-white/5 overflow-hidden mb-8">
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: progress / 100 }}
-              exit={{ opacity: 0, x: 100, transition: { duration: 0.5 } }}
-              className="absolute inset-0 bg-blue-500/60 shadow-[0_0_15px_rgba(59,130,246,0.2)] origin-left"
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              className="absolute inset-0 bg-white/40 shadow-[0_0_20px_rgba(255,255,255,0.2)] origin-left"
             />
           </div>
 
           <div className="flex justify-between items-end opacity-20">
             <div className="flex flex-col gap-1">
               <span className="text-[8px] uppercase tracking-[0.2em] font-light">Status: Synchronized</span>
-              <span className="text-[8px] uppercase tracking-[0.2em] font-light">Protocol: cinematic_v9</span>
+              <span className="text-[8px] uppercase tracking-[0.2em] font-light">Protocol: cinematic_v11.x</span>
             </div>
             <span className="text-2xl tabular-nums tracking-tighter font-light" style={{ fontFamily: "'Instrument Serif', serif" }}>
               {Math.round(progress)}%
@@ -173,17 +149,9 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
           </div>
         </motion.div>
 
-        {/* Sand Noise Displacement Filter */}
-        <svg className="absolute w-0 h-0">
-          <filter id="sand-noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="35" />
-          </filter>
-        </svg>
-
-        {/* Ambient Corner Glows */}
-        <div className="absolute -bottom-40 -left-40 w-[800px] h-[800px] bg-blue-600/5 blur-[180px] rounded-full pointer-events-none" />
-        <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-indigo-600/5 blur-[180px] rounded-full pointer-events-none" />
+        {/* Ambient Corner Glows - Desaturated */}
+        <div className="absolute -bottom-40 -left-40 w-[800px] h-[800px] bg-white/5 blur-[180px] rounded-full pointer-events-none" />
+        <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-white/5 blur-[180px] rounded-full pointer-events-none" />
       </motion.div>
     </AnimatePresence>
   )
