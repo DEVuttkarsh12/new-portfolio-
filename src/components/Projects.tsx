@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useRef } from 'react'
 
@@ -41,12 +41,12 @@ const containerVariants = {
   }
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1, ease: [0.215, 0.61, 0.355, 1] }
+    transition: { duration: 1, ease: "easeOut" }
   }
 }
 

@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useMemo } from 'react'
 
 // Regular small twinkling stars
-const Star = ({ index }: { index: number }) => {
+const Star = () => {
   const size = useMemo(() => Math.random() * 1.8 + 0.5, [])
   const top = useMemo(() => Math.random() * 100, [])
   const left = useMemo(() => Math.random() * 100, [])
@@ -36,7 +36,7 @@ const Star = ({ index }: { index: number }) => {
 }
 
 // Larger bokeh/glow stars scattered around
-const BokehStar = ({ index }: { index: number }) => {
+const BokehStar = () => {
   const size = useMemo(() => 2.5 + Math.random() * 2, [])
   const top = useMemo(() => Math.random() * 100, [])
   const left = useMemo(() => Math.random() * 100, [])
@@ -88,10 +88,10 @@ export const CosmicBackground = () => {
       {/* Star layer with parallax */}
       <motion.div style={{ y }} className="absolute inset-0 w-full h-[120%]">
         {stars.map((_, i) => (
-          <Star key={i} index={i} />
+          <Star key={i} />
         ))}
         {bokehStars.map((_, i) => (
-          <BokehStar key={`bokeh-${i}`} index={i} />
+          <BokehStar key={`bokeh-${i}`} />
         ))}
       </motion.div>
 
