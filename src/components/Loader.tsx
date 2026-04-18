@@ -116,8 +116,8 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
             <div className="h-[1px] w-20 bg-white/20" />
           </div>
           
-          <h2 className="text-7xl md:text-[10rem] tracking-tighter mb-14 leading-none" style={{ fontFamily: "'Instrument Serif', serif" }}>
-            PROJECT <em className="not-italic text-white/30 italic">ODYSSEY</em>
+          <h2 className="text-3xl md:text-5xl tracking-[0.2em] mb-12 uppercase font-light" style={{ fontFamily: "'Inter', sans-serif" }}>
+            LOADING <span className="opacity-20">PORTFOLIO</span>
           </h2>
           
           <div className="inline-flex items-center gap-5 px-10 py-4 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-3xl shadow-[0_8px_48px_rgba(0,0,0,1)]">
