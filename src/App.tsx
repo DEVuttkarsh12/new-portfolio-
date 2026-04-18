@@ -17,7 +17,7 @@ function App() {
     <>
       <CustomCursor />
       
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {loading ? (
           <Loader key="loader" onComplete={() => setLoading(false)} />
         ) : (
