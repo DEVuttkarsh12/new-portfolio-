@@ -94,7 +94,7 @@ export const Footer = () => {
 
         {/* Main Interface */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* --- Polished Query Form (Col 7) --- */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -105,7 +105,7 @@ export const Footer = () => {
           >
             <div className="liquid-glass p-8 md:p-12 rounded-[2.5rem] border border-white/5 relative overflow-hidden group">
               {/* Animated Inner Background Sparkle */}
-              <motion.div 
+              <motion.div
                 animate={{ opacity: [0.03, 0.08, 0.03] }}
                 transition={{ duration: 8, repeat: Infinity }}
                 className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-indigo-500/10 pointer-events-none"
@@ -138,9 +138,9 @@ export const Footer = () => {
                       </button>
                     </motion.div>
                   ) : (
-                    <motion.form 
+                    <motion.form
                       key="form"
-                      onSubmit={handleSubmit} 
+                      onSubmit={handleSubmit}
                       className="flex flex-col gap-8"
                     >
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -244,14 +244,14 @@ export const Footer = () => {
             className="lg:col-span-5 flex flex-col gap-8 h-full"
           >
             {/* Highly Polished QR Card */}
-            <motion.div 
+            <motion.div
               whileHover={{ y: -8 }}
               className="liquid-glass p-10 rounded-[2.5rem] border border-white/5 flex flex-col items-center gap-8 text-center relative group overflow-hidden"
             >
               <div className="absolute top-0 right-0 p-4 opacity-20">
                 <Globe size={40} className="text-white" />
               </div>
-              
+
               <div className="relative">
                 {/* Floating Glow Effect behind QR */}
                 <motion.div
@@ -288,7 +288,7 @@ export const Footer = () => {
               >
                 devuttkarsh<span className="text-muted-foreground/40">@</span>gmail.com
                 <motion.span className="inline-block ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                   <ArrowDownLeft size={20} className="inline rotate-180" />
+                  <ArrowDownLeft size={20} className="inline rotate-180" />
                 </motion.span>
               </motion.a>
 
