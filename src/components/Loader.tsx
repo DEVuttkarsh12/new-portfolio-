@@ -10,14 +10,14 @@ const Pixel = () => {
   return (
     <motion.div
       initial={{ opacity: 1, scale: 1 }}
-      exit={{ 
-        opacity: 0, 
+      exit={{
+        opacity: 0,
         scale: 0.8,
-        transition: { 
-          duration: 1.8, 
+        transition: {
+          duration: 1.8,
           delay: delay,
           ease: "easeInOut"
-        } 
+        }
       }}
       className="bg-[#050505] w-full h-full"
     />
@@ -45,7 +45,7 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
           onComplete()
           return 100
         }
-        
+
         const msgIndex = Math.floor((prev / 100) * loadingMessages.length)
         setCurrentMessage(loadingMessages[Math.min(msgIndex, loadingMessages.length - 1)])
 
@@ -68,21 +68,21 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
         ATMOSPHERE LAYER: Restored Cinematic Video 
         Layered above the pixels so it is clear as the background of the loader
       */}
-      <motion.div 
+      <motion.div
         exit={{ opacity: 0, transition: { duration: 1.0 } }}
         className="absolute inset-0 z-30"
       >
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover scale-110 blur-[2px] opacity-60 grayscale-[0.2]"
         >
           <source src={VIDEO_URL} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
-        
+
         {/* TEXTURE LAYER: Noticeable grainy blur overlay inside the video atmosphere */}
         <div className="absolute inset-0 backdrop-blur-[10px] film-grain opacity-40 pointer-events-none" />
       </motion.div>
@@ -102,8 +102,8 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ 
-            opacity: 0, 
+          exit={{
+            opacity: 0,
             scale: 0.9,
             filter: "blur(20px)",
             transition: { duration: 1.0, ease: "easeIn" }
@@ -115,11 +115,11 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
             <span className="text-[11px] uppercase tracking-[1.2em] text-white font-light">Initialization</span>
             <div className="h-[1px] w-20 bg-white/20" />
           </div>
-          
+
           <h2 className="text-3xl md:text-5xl tracking-[0.2em] mb-12 uppercase font-light" style={{ fontFamily: "'Inter', sans-serif" }}>
             LOADING <span className="opacity-20">PORTFOLIO</span>
           </h2>
-          
+
           <div className="inline-flex items-center gap-5 px-10 py-4 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-3xl shadow-[0_8px_48px_rgba(0,0,0,1)]">
             <span className="w-2.5 h-2.5 bg-white/60 rounded-full animate-pulse shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
             <p className="text-[13px] uppercase tracking-[0.5em] text-white/40 font-medium whitespace-nowrap">
@@ -152,7 +152,7 @@ export const Loader = ({ onComplete }: { onComplete: () => void }) => {
       </div>
 
       {/* Global Metadata */}
-      <motion.div 
+      <motion.div
         exit={{ opacity: 0, scale: 1.1, filter: "blur(15px)", transition: { duration: 1.2 } }}
         className="absolute inset-x-16 bottom-16 flex justify-between items-end pointer-events-none opacity-20 z-50"
       >
