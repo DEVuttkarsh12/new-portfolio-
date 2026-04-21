@@ -62,7 +62,7 @@ export const Projects = () => {
   const lineGlowOpacity = useTransform(scrollYProgress, [0.1, 0.2, 0.8, 0.9], [0, 1, 1, 0])
 
   return (
-    <section ref={sectionRef} id="projects" className="py-40 px-6 relative overflow-hidden bg-background">
+    <section ref={sectionRef} id="projects" className="py-40 px-6 relative overflow-hidden bg-transparent">
       {/* Background Atmosphere */}
       <div className="absolute top-0 left-0 right-0 h-40 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #020a13 0%, transparent 100%)' }} />
       
@@ -79,7 +79,7 @@ export const Projects = () => {
             className="text-6xl md:text-8xl tracking-tighter"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
-            Project <em className="not-italic text-muted-foreground/40 italic">Ladder</em>
+            Selected <em className="not-italic text-muted-foreground/40 italic">Works</em>
           </h2>
         </motion.div>
 
@@ -98,7 +98,7 @@ export const Projects = () => {
           <div className="absolute left-4 top-0 bottom-0 w-[1px] bg-white/5 md:hidden" />
 
           {/* Project Steps */}
-          <div className="flex flex-col gap-24 md:gap-40 lg:gap-56">
+          <div className="flex flex-col gap-32 md:gap-48">
             {projects.map((project, index) => {
               const isRight = index % 2 === 0
               
@@ -127,12 +127,12 @@ export const Projects = () => {
                       whileInView="visible"
                       viewport={{ once: true, margin: "-100px" }}
                       className={`
-                        w-full md:w-[45%] group relative
-                        p-8 md:p-12 
-                        bg-white/[0.03] backdrop-blur-3xl 
-                        border border-white/5 rounded-3xl
-                        hover:border-white/15 transition-all duration-700
-                        shadow-[0_8px_32px_rgba(0,0,0,0.5)]
+                        w-full md:w-[48%] group relative
+                        p-8 md:p-14 
+                        bg-white/[0.05] backdrop-blur-[40px] 
+                        border border-white/10 rounded-3xl
+                        hover:border-white/20 transition-all duration-700
+                        shadow-[0_24px_80px_rgba(0,0,0,0.6)]
                       `}
                     >
                       {/* Floating Index Node */}
