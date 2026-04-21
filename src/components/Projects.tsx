@@ -62,8 +62,8 @@ export const Projects = () => {
 
   return (
     <section ref={sectionRef} id="projects" className="py-24 md:py-32 px-6 relative overflow-hidden bg-transparent">
-      {/* Background Atmosphere - Gradient reveal */}
-      <div className="absolute top-0 left-0 right-0 h-40 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 100%)' }} />
+      {/* Top seamless transition fade — matches Hero's bottom atmosphere */}
+      <div className="absolute top-0 left-0 right-0 h-40 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, #020a13 0%, transparent 100%)' }} />
       
       <div className="max-w-7xl mx-auto relative z-20">
         <motion.div
@@ -78,7 +78,7 @@ export const Projects = () => {
             className="text-5xl md:text-7xl tracking-tighter"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
-            Selected <em className="not-italic text-muted-foreground/40 italic">Works</em>
+            My <em className="not-italic text-muted-foreground/40 italic">Projects</em>
           </h2>
         </motion.div>
 
