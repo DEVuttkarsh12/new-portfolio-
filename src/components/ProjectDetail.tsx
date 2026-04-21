@@ -1,13 +1,17 @@
 import { motion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, Calendar, User, Globe } from 'lucide-react'
-import type { Project } from './Projects'
+import { ArrowLeft, ExternalLink, Calendar, User, Globe, ArrowRight } from 'lucide-react'
+import { projects, type Project } from './Projects'
 
 interface ProjectDetailProps {
   project: Project;
   onBack: () => void;
+  onSelectProject: (p: Project) => void;
 }
 
-export const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
+export const ProjectDetail = ({ project, onBack, onSelectProject }: ProjectDetailProps) => {
+  const currentIndex = projects.findIndex(p => p.id === project.id)
+  const nextProject = projects[(currentIndex + 1) % projects.length]
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -132,16 +136,27 @@ export const ProjectDetail = ({ project, onBack }: ProjectDetailProps) => {
               </div>
             </motion.div>
 
-            {/* Next Project Teaser (Placeholder) */}
-            <div className="mt-20 border-t border-white/5 pt-12 flex justify-between items-center group cursor-pointer opacity-30 hover:opacity-100 transition-opacity">
-              <div className="flex flex-col gap-2">
-                <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Next Project</span>
-                <span className="text-3xl font-light tracking-tighter" style={{ fontFamily: "'Instrument Serif', serif" }}>Orbit Commerce</span>
+            {/* Next Project Teaser (Now Functional) */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              whileHover={{ opacity: 1 }}
+              onClick={() => {
+                onSelectProject(nextProject)
+                document.querySelector('.fixed.inset-0.overflow-y-auto')?.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+              className="mt-20 border-t border-white/5 pt-12 flex justify-between items-center group cursor-pointer transition-all"
+            >
+              <div className="flex flex-col gap-2 transition-transform group-hover:translate-x-2">
+                <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-white/40">Next Project</span>
+                <span className="text-3xl md:text-4xl font-light tracking-tighter" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                  {nextProject.title}
+                </span>
               </div>
-              <div className="p-4 rounded-full border border-white/10 group-hover:bg-white/5 transition-all">
-                <ExternalLink size={24} className="text-white/20 group-hover:text-white" />
+              <div className="p-4 rounded-full border border-white/10 group-hover:bg-white/5 group-hover:border-white/30 transition-all">
+                <ArrowRight size={24} className="text-white/20 group-hover:text-white" />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -43,6 +43,7 @@ function App() {
                 <ProjectDetail 
                   project={selectedProject} 
                   onBack={() => setSelectedProject(null)} 
+                  onSelectProject={setSelectedProject}
                   key="project-detail"
                 />
               )}
