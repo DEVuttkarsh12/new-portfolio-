@@ -44,7 +44,7 @@ function App() {
                   project={selectedProject} 
                   onBack={() => setSelectedProject(null)} 
                   onSelectProject={setSelectedProject}
-                  key="project-detail"
+                  key={selectedProject.id}
                 />
               )}
             </AnimatePresence>

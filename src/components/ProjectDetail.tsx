@@ -14,9 +14,10 @@ export const ProjectDetail = ({ project, onBack, onSelectProject }: ProjectDetai
 
   return (
     <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20, filter: "blur(10px)" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-0 z-[100] bg-[#020a13] overflow-y-auto"
     >
       {/* Floating Back Button */}
